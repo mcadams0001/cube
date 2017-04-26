@@ -1,5 +1,6 @@
 package adam;
 
+import adam.exceptions.EmptyCubesExceptions;
 import adam.fixture.BlockFixture;
 import adam.services.CubeServiceImpl;
 import adam.services.ExecutionService;
@@ -12,7 +13,7 @@ public class HappyCube {
         //Do nothing
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, EmptyCubesExceptions {
         if (args.length == 0) {
             System.out.println("Please provide filename for the result file");
             return;

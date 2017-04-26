@@ -2,6 +2,7 @@ package adam.services;
 
 import adam.dto.Block;
 import adam.dto.Cube;
+import adam.exceptions.EmptyCubesExceptions;
 import adam.fixture.BlockFixture;
 
 import java.io.FileWriter;
@@ -17,15 +18,14 @@ public class ExecutionServiceImpl implements ExecutionService {
     }
 
     @Override
-    public void createCubesFile(String fileName, List<Block> blocks) throws IOException {
+    public void createCubesFile(String fileName, List<Block> blocks) throws IOException, EmptyCubesExceptions {
         List<Cube> cubes = cubeService.createAllCubesFromBlocks(BlockFixture.getBlocks());
         writeCubesToFile(fileName, cubes);
     }
 
-    private void writeCubesToFile(String fileName, List<Cube> cubes) throws IOException {
+    private void writeCubesToFile(String fileName, List<Cube> cubes) throws IOException, EmptyCubesExceptions {
         if (cubes.isEmpty()) {
-            System.out.println("No cube could be created from given blocks");
-            return;
+            throw new EmptyCubesExceptions("No cube could be created from given blocks");
         }
         try(FileWriter fileWriter = getFileWriter(fileName)) {
             for (Cube cube : cubes) {

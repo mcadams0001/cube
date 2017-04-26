@@ -2,17 +2,23 @@ package adam.services;
 
 import adam.dto.Block;
 import adam.dto.Cube;
+import adam.exceptions.EmptyCubesExceptions;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
@@ -46,5 +52,23 @@ public class ExecutionServiceImplTest {
         spyService.createCubesFile("fileName", blocks);
         verify(mockCube, times(4)).printCube(mockFileWriter);
         verify(mockFileWriter).flush();
+    }
+
+    @Test(expected = EmptyCubesExceptions.class)
+    public void testReturnWithoutWritingFileIfCubesAreEmpty() throws IOException, EmptyCubesExceptions {
+        List<Block> blocks = new ArrayList<>();
+        List<Cube> cubes = new ArrayList<>();
+        when(mockCubeService.createAllCubesFromBlocks(anyList())).thenReturn(cubes);
+        service.createCubesFile("fileName", blocks);
+    }
+
+    @Test
+    public void testShouldGet() throws IOException {
+        URL url = ExecutionServiceImpl.class.getResource(".");
+        File targetFolder = new File(url.getFile());
+        assertThat(targetFolder, notNullValue());
+        try (FileWriter fileWriter = service.getFileWriter(targetFolder.getAbsolutePath() + File.separator + "sampleFile.txt")){
+            assertThat(fileWriter, notNullValue());
+        }
     }
 }
