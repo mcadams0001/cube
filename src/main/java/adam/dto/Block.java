@@ -118,7 +118,7 @@ public class Block {
         return (int) shape.chars().filter(c -> c == '1').count();
     }
 
-    List<Edge> getEdges() {
+    public List<Edge> getEdges() {
         return edges;
     }
 

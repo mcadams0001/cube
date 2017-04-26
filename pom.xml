@@ -13,7 +13,6 @@
         <compiler.backend.version>1.8</compiler.backend.version>
         <sonar.host.url>https://sonarqube.com</sonar.host.url>
         <sonar.organization>mcadams0001-github</sonar.organization>
-        <sonar.exclusions>**/dto/**,**/builder/**,**/fixture/**</sonar.exclusions>
         <sonar.jacoco.reportPaths>${basedir}/target/jacoco.exec</sonar.jacoco.reportPaths>
     </properties>
 
@@ -119,6 +118,11 @@
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-junit</artifactId>
             <version>2.0.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>2.7.22</version>
         </dependency>
     </dependencies>
     <reporting>

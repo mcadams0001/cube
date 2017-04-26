@@ -211,7 +211,7 @@ public class Edge {
      * Element 0 is vertex1 and element 1 is vertex2
      * @return list of vertices for the edge.
      */
-    List<Vertex> getVertices() {
+    public List<Vertex> getVertices() {
         return vertices;
     }
 
