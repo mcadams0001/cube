@@ -2,7 +2,7 @@ package adam.services;
 
 import adam.dto.Block;
 import adam.dto.Cube;
-import adam.exceptions.EmptyCubesExceptions;
+import adam.exceptions.CubeCreationExceptions;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -54,8 +54,8 @@ public class ExecutionServiceImplTest {
         verify(mockFileWriter).flush();
     }
 
-    @Test(expected = EmptyCubesExceptions.class)
-    public void testReturnWithoutWritingFileIfCubesAreEmpty() throws IOException, EmptyCubesExceptions {
+    @Test(expected = CubeCreationExceptions.class)
+    public void testReturnWithoutWritingFileIfCubesAreEmpty() throws IOException, CubeCreationExceptions {
         List<Block> blocks = new ArrayList<>();
         List<Cube> cubes = new ArrayList<>();
         when(mockCubeService.createAllCubesFromBlocks(anyList())).thenReturn(cubes);

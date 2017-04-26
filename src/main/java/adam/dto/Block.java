@@ -2,7 +2,10 @@ package adam.dto;
 
 import adam.enums.RotationEnum;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.EnumMap;
+import java.util.List;
 import java.util.function.Predicate;
 
 import static java.util.stream.Collectors.toList;
@@ -25,7 +28,7 @@ public class Block {
     /**
      * Map holding reference to all rotated blocks of this block.
      */
-    private Map<RotationEnum, Block> rotatedBlocks = new HashMap<>();
+    private EnumMap<RotationEnum, Block> rotatedBlocks = new EnumMap<>(RotationEnum.class);
     /**
      * Reference to mirrored block of this block.
      */

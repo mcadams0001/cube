@@ -4,18 +4,26 @@ public class PointXYZ extends PointXY {
     private int z;
 
     public PointXYZ(int x, int y, int z) {
-        super(x,y);
+        super(x, y);
         this.z = z;
     }
+
+    @Override
     public int getZ() {
         return z;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
 
         PointXYZ pointXYZ = (PointXYZ) o;
 

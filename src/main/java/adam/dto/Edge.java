@@ -85,9 +85,9 @@ public class Edge {
     int matches(Edge edge) {
         int result = 0;
         int singleResult = 0;
-        String shape = edge.shape;
+        String localShape = edge.shape;
         for (int i = 0; i < 3; i++) {
-            singleResult = edgeValue(shape, i);
+            singleResult = edgeValue(localShape, i);
             if (singleResult == 2)
                 return -1;
             result += singleResult;
@@ -112,12 +112,12 @@ public class Edge {
      * @return with the new edge shape.
      */
     String joinShapes(Edge edge) {
-        String shape = edge.shape;
+        String localShape = edge.shape;
         char vertex1Shape = getVertexShape(edge.getVertices(), 0);
         char vertex2Shape = getVertexShape(edge.getVertices(), 1);
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < 3; i++) {
-            builder.append(singleShapeValue(this.shape, i) + singleShapeValue(shape, i));
+            builder.append(singleShapeValue(this.shape, i) + singleShapeValue(localShape, i));
         }
         if (vertex1Shape == '1') {
             vertices.get(0).setShape(vertex1Shape);

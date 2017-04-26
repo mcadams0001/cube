@@ -1,19 +1,17 @@
 package adam;
 
-import adam.exceptions.EmptyCubesExceptions;
+import adam.exceptions.CubeCreationExceptions;
 import adam.fixture.BlockFixture;
 import adam.services.CubeServiceImpl;
 import adam.services.ExecutionService;
 import adam.services.ExecutionServiceImpl;
-
-import java.io.IOException;
 
 public class HappyCube {
     private HappyCube() {
         //Do nothing
     }
 
-    public static void main(String[] args) throws IOException, EmptyCubesExceptions {
+    public static void main(String[] args) throws CubeCreationExceptions {
         if (args.length == 0) {
             System.out.println("Please provide filename for the result file");
             return;

@@ -1,7 +1,7 @@
 package adam.services;
 
 import adam.dto.Block;
-import adam.exceptions.EmptyCubesExceptions;
+import adam.exceptions.CubeCreationExceptions;
 
 import java.io.IOException;
 import java.util.List;
@@ -15,5 +15,5 @@ public interface ExecutionService {
      * @param fileName name of the file where the resolved cubes are to be stored.
      * @param blocks the set of blocks used for building the cube.
      */
-    void createCubesFile(String fileName, List<Block> blocks) throws IOException, EmptyCubesExceptions;
+    void createCubesFile(String fileName, List<Block> blocks) throws CubeCreationExceptions;
 }
