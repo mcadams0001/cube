@@ -61,7 +61,7 @@ public class Cube {
     }
 
     public void clear() {
-        blocks.stream().forEach(CubeBlock::clear);
+        blocks.forEach(CubeBlock::clear);
     }
 
 
@@ -114,8 +114,8 @@ public class Cube {
         writer.write("\n\n");
     }
 
-    public void printCubeDebug(Writer writer) throws IOException {
-        getBlocks().stream().forEach(b -> {
+    void printCubeDebug(Writer writer) throws IOException {
+        getBlocks().forEach(b -> {
             try {
                 writer.write(b.getId() + "->" + b.getAssignedBlock().toString() + "\n");
             } catch (IOException e) {

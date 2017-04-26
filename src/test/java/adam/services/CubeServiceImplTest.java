@@ -30,7 +30,7 @@ public class CubeServiceImplTest {
         Cube cube = service.createCubeFromBlocks(blockList);
         assertThat(cube, notNullValue());
         assertThat(cube.getBlocks().stream().filter(CubeBlock::isOccupied).count(), equalTo(6L));
-        cube.getBlocks().stream().forEach(b -> System.out.println(b.getId()+ "->"+b.getAssignedBlock().toString()));
+        cube.getBlocks().forEach(b -> System.out.println(b.getId()+ "->"+b.getAssignedBlock().toString()));
         StringWriter writer = new StringWriter();
         cube.printCube(writer);
         System.out.println(writer.toString());
@@ -49,7 +49,7 @@ public class CubeServiceImplTest {
         assertThat(cubes.size(), equalTo(5));
         StringWriter writer = new StringWriter();
         for (Cube cube : cubes) {
-            cube.getBlocks().stream().forEach(b -> writer.write(b.getId()+ "->"+b.getAssignedBlock().toString() + "\n"));
+            cube.getBlocks().forEach(b -> writer.write(b.getId()+ "->"+b.getAssignedBlock().toString() + "\n"));
             cube.printCube(writer);
         }
         System.out.println(writer.toString());

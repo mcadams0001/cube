@@ -10,6 +10,10 @@ import java.util.List;
  * Fixture holding definition of blocks from blue set.
  */
 public class BlockFixture {
+
+    private BlockFixture() {
+        //Hide default constructor.
+    }
     /*
    0 0 1 0 0
  0     []     0

@@ -5,7 +5,6 @@ import adam.enums.RotationEnum;
 import java.util.*;
 import java.util.function.Predicate;
 
-import static java.util.stream.Collectors.summingInt;
 import static java.util.stream.Collectors.toList;
 
 /**
@@ -13,32 +12,32 @@ import static java.util.stream.Collectors.toList;
  */
 public class Block {
 
-    public static final int TOTAL_EDGES = 4;
+    static final int TOTAL_EDGES = 4;
 
     /**
      * The id of the block, which should be kept unique.
      */
-    protected int id;
+    private int id;
     /**
      * The set of 4 edges describing the block.
      */
-    protected List<Edge> edges;
+    List<Edge> edges;
     /**
      * Map holding reference to all rotated blocks of this block.
      */
-    protected Map<RotationEnum, Block> rotatedBlocks = new HashMap<>();
+    private Map<RotationEnum, Block> rotatedBlocks = new HashMap<>();
     /**
      * Reference to mirrored block of this block.
      */
-    protected Block mirroredBlock;
+    private Block mirroredBlock;
     /**
      * Flag set to true if this block is mirrored otherwise false.
      */
-    protected boolean mirrored;
+    private boolean mirrored;
     /**
      * The rotation of this block, by default 0 degree.
      */
-    protected RotationEnum rotated = RotationEnum.DEG_0;
+    private RotationEnum rotated = RotationEnum.DEG_0;
 
     Block(int id, List<Edge> edges) {
         this.id = id;
@@ -79,7 +78,7 @@ public class Block {
      * @param block the block to be mirrored.
      * @return a new instance of block being the mirror in Y axis of the original one.
      */
-    public static Block createMirroredBlock(Block block) {
+    private static Block createMirroredBlock(Block block) {
         String[] rotatedShapes = new String[]{
                 Edge.mirroredShape(block.getEdge(0).getFullShape()),
                 Edge.mirroredShape(block.getEdge(3).getFullShape()),
@@ -97,7 +96,7 @@ public class Block {
      * @param rotationEnum the enumeration describing the degree of rotation.
      * @return a new instance of block being a rotated version of original one.
      */
-    public static Block createRotatedBlock(Block block, RotationEnum rotationEnum) {
+    private static Block createRotatedBlock(Block block, RotationEnum rotationEnum) {
         String[] rotatedShapes = rotationEnum.rotateShapes(new String[]{
                 block.getEdge(0).getFullShape(),
                 block.getEdge(1).getFullShape(),
@@ -115,15 +114,15 @@ public class Block {
      * @param shape the shape for which filled spaces are to be counted.
      * @return the total number of 1 in the shape.
      */
-    public static int countFilledSpaces(String shape) {
+    private static int countFilledSpaces(String shape) {
         return (int) shape.chars().filter(c -> c == '1').count();
     }
 
-    public List<Edge> getEdges() {
+    List<Edge> getEdges() {
         return edges;
     }
 
-    public Edge getEdge(int index) {
+    Edge getEdge(int index) {
         return edges.get(index);
     }
 
@@ -136,7 +135,7 @@ public class Block {
      *
      * @return List of lines making up the printed block
      */
-    public List<String> printBlock() {
+    List<String> printBlock() {
         List<String> printList = new ArrayList<>();
         printList.add(edges.get(2).printEdge());
         for (int i = 0; i < TOTAL_EDGES - 1; i++) {
@@ -169,7 +168,7 @@ public class Block {
      * Checks whether the given block is fully symmetric.
      * @return true if fully symmetric in both X and Y axis otherwise false.
      */
-    public boolean isSymmetric() {
+    boolean isSymmetric() {
         List<String> fullEdges = edgeShapes();
         return fullEdges.stream().allMatch(Predicate.isEqual(fullEdges.get(0)));
     }
@@ -187,9 +186,9 @@ public class Block {
      * Calculates the density (how well the block fills the spaces after insertion, number of edges having 1 in their shape after insertion).
      * @return number of 1 on the edge of the block.
      */
-    public int density() {
+    int density() {
         List<String> fullEdges = edgeShapes();
-        return fullEdges.stream().collect(summingInt(Block::countFilledSpaces));
+        return fullEdges.stream().mapToInt(Block::countFilledSpaces).sum();
     }
 
     /**

@@ -42,7 +42,7 @@ public class CubeBlock extends Block {
      * Joins shapes between given block and empty space in the cube represented by this.
      * @param block the block to be joined with the given space in the cube.
      */
-    public void joinBlockShapes(Block block) {
+    private void joinBlockShapes(Block block) {
         for (int i = 0; i < TOTAL_EDGES; i++) {
             getEdge(i).joinShapes(block.getEdge(i));
         }
@@ -54,7 +54,7 @@ public class CubeBlock extends Block {
      * @param block the block to be checked whether it fits the space in the cube.
      * @return -1 if block doesn't fit otherwise the density (how well the block fills the spaces after insertion, number of edges having 1 in their shape after insertion).
      */
-    public int blockMatches(Block block) {
+    private int blockMatches(Block block) {
         int matchValue = 0;
         for (int i = 0; i < TOTAL_EDGES; i++) {
             int singleMatchValue = getEdge(i).matches(block.getEdge(i));
@@ -69,8 +69,8 @@ public class CubeBlock extends Block {
     /**
      * Clears the space in the block by cleaning all edges(4) and vertices(4).
      */
-    public void clear() {
-        edges.stream().forEach(Edge::clear);
+    void clear() {
+        edges.forEach(Edge::clear);
         assignedBlock = null;
     }
 

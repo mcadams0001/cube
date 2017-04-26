@@ -120,7 +120,7 @@ public class CubeServiceImpl implements CubeService {
      * @param block the block to be inserted into the cube.
      * @return the insertion result.
      */
-    InsertionResult insertedRotatedBlock(CubeBlock cubeBlock, Block block) {
+    private InsertionResult insertedRotatedBlock(CubeBlock cubeBlock, Block block) {
         Block selectedBlock = null;
         int highDensity = -1;
         for (RotationEnum rotation : EnumSet.allOf(RotationEnum.class)) {
@@ -141,7 +141,7 @@ public class CubeServiceImpl implements CubeService {
      * @param block the block to be inserted into the cube.
      * @return block being the best fit either original or rotated 90 degree clockwise.
      */
-    Block insertOneAxisSymmetricBlock(CubeBlock cubeBlock, Block block) {
+    private Block insertOneAxisSymmetricBlock(CubeBlock cubeBlock, Block block) {
         int density = cubeBlock.validatePlacement(block);
         Block b90 = block.rotated(RotationEnum.DEG_90);
         int density90 = cubeBlock.validatePlacement(b90);
@@ -156,7 +156,7 @@ public class CubeServiceImpl implements CubeService {
      * @param blocks the set of blocks to be inserted into the cube.
      * @return map with keys being id's of blocks and blocks as values.
      */
-    Map<Character, Block> mapBlockToInternalIndex(List<Block> blocks) {
+    private Map<Character, Block> mapBlockToInternalIndex(List<Block> blocks) {
         return blocks.stream().collect(toMap(Block::getCharIndex, b -> b));
     }
 

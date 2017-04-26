@@ -222,7 +222,7 @@ public class CubeBlockTest {
         }
     }
 
-    public void assertShapeForEdge(List<Edge> edges, String... shapes) {
+    private void assertShapeForEdge(List<Edge> edges, String... shapes) {
         for (int i = 0; i < shapes.length; i++) {
             assertThat("Invalid edge for id: " + i, edges.get(i).getFullShape(), equalTo(shapes[i]));
         }

@@ -5,9 +5,6 @@ import org.junit.Test;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.*;
 
-/**
- * Created by Adam on 16/05/2015.
- */
 public class RotationEnumTest {
     @Test
     public void shouldRotationEnum() throws Exception {

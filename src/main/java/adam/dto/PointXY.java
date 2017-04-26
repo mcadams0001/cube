@@ -1,10 +1,10 @@
 package adam.dto;
 
 public class PointXY implements Point {
-    protected int x;
-    protected int y;
+    int x;
+    int y;
 
-    public PointXY(int x, int y) {
+    PointXY(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -28,8 +28,7 @@ public class PointXY implements Point {
 
         PointXY pointXY = (PointXY) o;
 
-        if (x != pointXY.x) return false;
-        return y == pointXY.y;
+        return x == pointXY.x && y == pointXY.y;
 
     }
 

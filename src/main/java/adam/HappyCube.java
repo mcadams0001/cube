@@ -10,6 +10,10 @@ import java.io.IOException;
 import java.util.List;
 
 public class HappyCube {
+    private HappyCube() {
+        //Do nothing
+    }
+
     public static void main(String[] args) throws IOException {
         if (args.length == 0) {
             System.out.println("Please provide filename for the result file");
@@ -21,7 +25,7 @@ public class HappyCube {
     }
 
     private static void writeCubesToFile(String fileName, List<Cube> cubes) throws IOException {
-        if (cubes.size() == 0) {
+        if (cubes.isEmpty()) {
             System.out.println("No cube could be created from given blocks");
             return;
         }

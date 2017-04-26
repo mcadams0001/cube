@@ -47,7 +47,7 @@ public class Edge {
      * @param vertex1 vertex from which the edge spans to.
      * @param vertex2 vertex to which the edge spans.
      */
-    public Edge(int id, String shape, Vertex vertex1, Vertex vertex2) {
+    Edge(int id, String shape, Vertex vertex1, Vertex vertex2) {
         this.shape = shape;
         this.id = id;
         vertices.add(vertex1);
@@ -62,7 +62,7 @@ public class Edge {
      * @param vertex2 vertex2 to which the edge spans.
      * @return a new instance of mirrored Edge.
      */
-    public static Edge mirroredEdge(Edge edge, Vertex vertex1, Vertex vertex2) {
+    static Edge mirroredEdge(Edge edge, Vertex vertex1, Vertex vertex2) {
         return new Edge(edge.id, mirroredShape(edge.shape), vertex1, vertex2);
     }
 
@@ -72,7 +72,7 @@ public class Edge {
      * @param shape the shape to be mirrored represented as e.g. "11010"
      * @return a new mirrored shape.
      */
-    public static String mirroredShape(String shape) {
+    static String mirroredShape(String shape) {
         return new StringBuilder(shape).reverse().toString();
     }
 
@@ -82,7 +82,7 @@ public class Edge {
      * @param edge the edge to matched.
      * @return -1 if there is a collision between edges or vertices.
      */
-    public int matches(Edge edge) {
+    int matches(Edge edge) {
         int result = 0;
         int singleResult = 0;
         String shape = edge.shape;
@@ -111,7 +111,7 @@ public class Edge {
      * @param edge the edge to be joined with existing one.
      * @return with the new edge shape.
      */
-    public String joinShapes(Edge edge) {
+    String joinShapes(Edge edge) {
         String shape = edge.shape;
         char vertex1Shape = getVertexShape(edge.getVertices(), 0);
         char vertex2Shape = getVertexShape(edge.getVertices(), 1);
@@ -185,16 +185,16 @@ public class Edge {
     /**
      * Clears the Edge from any values which changes all 1 to 0 including the vertices shapes.
      */
-    public void clear() {
+    void clear() {
         this.shape = "000";
-        this.vertices.stream().forEach(Vertex::clear);
+        this.vertices.forEach(Vertex::clear);
     }
 
     /**
      * Gets the edge shape.
      * @return the edge shape excluding shape of vertices e.g. "101"
      */
-    public String getShape() {
+    String getShape() {
         return shape;
     }
 
@@ -202,7 +202,7 @@ public class Edge {
      * Gets the edge full edge shape consisting of vertices shape and edge middle shape e.g. "11011".
      * @return string with full edge shape.
      */
-    public String getFullShape() {
+    String getFullShape() {
         return vertices.get(0).getShape() + shape + vertices.get(1).getShape();
     }
 
@@ -211,7 +211,7 @@ public class Edge {
      * Element 0 is vertex1 and element 1 is vertex2
      * @return list of vertices for the edge.
      */
-    public List<Vertex> getVertices() {
+    List<Vertex> getVertices() {
         return vertices;
     }
 
@@ -219,7 +219,7 @@ public class Edge {
      * Prints the edge's shape.
      * @return the string representing edge's shape.
      */
-    public String printEdge() {
+    String printEdge() {
         return getFullShape().replace("0", " ").replace("1", "O");
     }
 

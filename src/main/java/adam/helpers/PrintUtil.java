@@ -8,13 +8,16 @@ import java.util.List;
  * Helper utility for print blocks in given output.
  */
 public final class PrintUtil {
+    private PrintUtil() {
+        //Hide default constructor
+    }
     /**
      * Prints a block being represented as list of shapes.
      * @param list the list of strings representing shapes from edges of a block.
      * @param writer the writer to which the information is to be written to.
      */
     public static void printList(List<String> list, Writer writer) {
-        list.stream().forEach(l -> {
+        list.forEach(l -> {
             try {
                 //print space
                 writer.write("      ");

@@ -19,7 +19,7 @@ public class Vertex {
         this.point = point;
     }
 
-    public Vertex(int id, Point point, char shape) {
+    Vertex(int id, Point point, char shape) {
         this.id = id;
         this.point = point;
         this.shape = shape;
@@ -33,15 +33,15 @@ public class Vertex {
         return point;
     }
 
-    public char getShape() {
+    char getShape() {
         return shape;
     }
 
-    public void setShape(char shape) {
+    void setShape(char shape) {
         this.shape = shape;
     }
 
-    public void clear() {
+    void clear() {
         this.setShape('0');
     }
 
@@ -52,9 +52,7 @@ public class Vertex {
 
         Vertex vertex = (Vertex) o;
 
-        if (id != vertex.id) return false;
-        if (shape != vertex.shape) return false;
-        return !(point != null ? !point.equals(vertex.point) : vertex.point != null);
+        return id == vertex.id && shape == vertex.shape && !(point != null ? !point.equals(vertex.point) : vertex.point != null);
 
     }
 

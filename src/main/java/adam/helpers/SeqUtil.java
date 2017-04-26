@@ -11,6 +11,9 @@ import static java.util.stream.Collectors.toList;
  * placement of blocks in a cube.
  */
 public final class SeqUtil {
+    private SeqUtil() {
+        //Do nothing.
+    }
 
     /**
      * Creates a full set of sequences (permutations) to be tested during insertion of block to the cube.
@@ -29,7 +32,7 @@ public final class SeqUtil {
      * @param blockIds base ids of blocks to be used for initiating the permutation.
      * @param startIndex the start Index used for swapping characters in the block ids.
      */
-    static void permute(Queue<String> nextSequence, String blockIds, int startIndex) {
+    private static void permute(Queue<String> nextSequence, String blockIds, int startIndex) {
         if (startIndex == blockIds.length()) {
             return;
         }
