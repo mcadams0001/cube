@@ -14,7 +14,7 @@
         <sonar.host.url>https://sonarqube.com</sonar.host.url>
         <sonar.organization>mcadams0001-github</sonar.organization>
         <sonar.jacoco.reportPaths>${basedir}/target/jacoco.exec</sonar.jacoco.reportPaths>
-        <sonar.coverage.exclusions>**/dto/**,**/fixture/**,**/enums/**</sonar.coverage.exclusions>
+        <sonar.coverage.exclusions>**/exceptions/**,**/fixture/**,**/enums/**</sonar.coverage.exclusions>
         <sonar.cpd.exclusions>**/dto/**,**/fixture/**,**/enums/**</sonar.cpd.exclusions>
     </properties>
 
@@ -78,7 +78,6 @@
                 <version>0.7.9</version>
                 <configuration>
                     <excludes>
-                        <exclude>**/dto/**</exclude>
                         <exclude>**/fixture/**</exclude>
                         <exclude>**/enums/**</exclude>
                     </excludes>
