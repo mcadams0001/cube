@@ -3,7 +3,6 @@ package adam.services;
 import adam.dto.Block;
 import adam.exceptions.CubeCreationExceptions;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
