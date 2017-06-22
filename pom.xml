@@ -15,7 +15,7 @@
         <sonar.organization>mcadams0001-github</sonar.organization>
         <sonar.jacoco.reportPaths>${basedir}/target/jacoco.exec</sonar.jacoco.reportPaths>
         <sonar.coverage.exclusions>**/HappyCube*,**/exceptions/**,**/fixture/**,**/enums/**</sonar.coverage.exclusions>
-        <sonar.cpd.exclusions>**/dto/**,**/fixture/**,**/enums/**</sonar.cpd.exclusions>
+        <sonar.cpd.exclusions>**/BlockFixture*,**/dto/**,**/fixture/**,**/enums/**</sonar.cpd.exclusions>
     </properties>
 
     <build>
