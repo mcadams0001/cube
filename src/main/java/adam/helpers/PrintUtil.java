@@ -8,30 +8,26 @@ import java.util.List;
  * Helper utility for print blocks in given output.
  */
 public final class PrintUtil {
-    private PrintUtil() {
+    PrintUtil() {
         //Hide default constructor
-    }
-    /**
-     * Prints a block being represented as list of shapes.
-     * @param list the list of strings representing shapes from edges of a block.
-     * @param writer the writer to which the information is to be written to.
-     */
-    public static void printList(List<String> list, Writer writer) {
-        list.forEach(l -> {
-            try {
-                //print space
-                writer.write("      ");
-                writer.write(l + "\n");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
     }
 
     /**
+     * Prints a block being represented as list of shapes.
      *
+     * @param list   the list of strings representing shapes from edges of a block.
      * @param writer the writer to which the information is to be written to.
-     * @param lists the variable argument being an array of multiple lists with shapes from edges of a blocks.
+     */
+    public static void printList(List<String> list, Writer writer) throws IOException {
+        for (String line : list) {
+            writer.write("      ");
+            writer.write(line + "\n");
+        }
+    }
+
+    /**
+     * @param writer the writer to which the information is to be written to.
+     * @param lists  the variable argument being an array of multiple lists with shapes from edges of a blocks.
      * @throws IOException if write fails.
      */
     @SafeVarargs

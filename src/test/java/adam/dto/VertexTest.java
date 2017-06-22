@@ -35,6 +35,7 @@ public class VertexTest {
         assertThat(vertex.equals(vertex2), equalTo(true));
         assertThat(vertex.equals(vertex), equalTo(true));
         assertThat(vertex.equals(null), equalTo(false));
+        assertThat(vertex.equals("test"), equalTo(false));
     }
 
     @Test
@@ -43,6 +44,7 @@ public class VertexTest {
         Vertex vertex = new Vertex(1, point, '0');
         Vertex vertex2 = new Vertex(2, point, 'X');
         assertThat(vertex.hashCode(), not(equalTo(vertex2.hashCode())));
+        assertThat(new Vertex(3,null).hashCode(), equalTo(2931));
     }
 
     @Test

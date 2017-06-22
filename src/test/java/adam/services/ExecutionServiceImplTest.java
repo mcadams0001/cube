@@ -19,6 +19,7 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
@@ -46,7 +47,7 @@ public class ExecutionServiceImplTest {
     public void createCubesFile() throws Exception {
         ExecutionServiceImpl spyService = spy(service);
         List<Block> blocks = new ArrayList<>();
-        List<Cube> cubes = Arrays.asList(mockCube,mockCube,mockCube,mockCube);
+        List<Cube> cubes = Arrays.asList(mockCube, mockCube, mockCube, mockCube);
         doReturn(mockFileWriter).when(spyService).getFileWriter(anyString());
         when(mockCubeService.createAllCubesFromBlocks(anyList())).thenReturn(cubes);
         spyService.createCubesFile("fileName", blocks);
@@ -67,8 +68,27 @@ public class ExecutionServiceImplTest {
         URL url = ExecutionServiceImpl.class.getResource(".");
         File targetFolder = new File(url.getFile());
         assertThat(targetFolder, notNullValue());
-        try (FileWriter fileWriter = service.getFileWriter(targetFolder.getAbsolutePath() + File.separator + "sampleFile.txt")){
+        try (FileWriter fileWriter = service.getFileWriter(targetFolder.getAbsolutePath() + File.separator + "sampleFile.txt")) {
             assertThat(fileWriter, notNullValue());
         }
+    }
+
+    @Test
+    public void testCaptureIOException() throws Exception {
+        Cube mockCube2 = mock(Cube.class);
+        ExecutionServiceImpl spyService = spy(service);
+        List<Block> blocks = new ArrayList<>();
+        List<Cube> cubes = Arrays.asList(mockCube, mockCube, mockCube2);
+        doReturn(mockFileWriter).when(spyService).getFileWriter(anyString());
+        when(mockCubeService.createAllCubesFromBlocks(anyList())).thenReturn(cubes);
+        doThrow(new IOException("test")).when(mockCube2).printCube(any());
+        try {
+            spyService.createCubesFile("fileName", blocks);
+            fail("Expected CubeCreationException");
+        } catch (CubeCreationExceptions ex) {
+            //Do nothing.
+        }
+        verify(mockCube, times(2)).printCube(mockFileWriter);
+        verify(mockFileWriter, never()).flush();
     }
 }
