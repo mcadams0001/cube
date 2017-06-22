@@ -11,7 +11,7 @@ import static java.util.stream.Collectors.toList;
  * placement of blocks in a cube.
  */
 public final class SeqUtil {
-    private SeqUtil() {
+    SeqUtil() {
         //Do nothing.
     }
 

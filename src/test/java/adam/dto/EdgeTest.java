@@ -16,6 +16,8 @@ public class EdgeTest {
         Edge edge2 = BlockFixture.getBlock3().rotated(RotationEnum.DEG_270).getEdge(0);
         int matches = edge.matches(edge2);
         assertThat(matches, equalTo(5));
+        assertThat(edge.getId(), equalTo(0));
+        assertThat(edge.toString(), equalTo("Edge0 [0,0]=1-[1,0]=1 11011"));
     }
 
     @Test

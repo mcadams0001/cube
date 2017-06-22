@@ -67,30 +67,31 @@ public class Cube {
 
     /**
      * Prints an unfolded cube in the following form:
+     *
      * @param writer writer to which the block is supposed to be printed to.
-
-
-            ------------------------------------
-            |          |           |           |
-            |    1     |     2     |     3     |
-            |          |           |           |
-            |          |           |           |
-            ------------------------------------
-                       |           |
-                       |     0     |
-                       |           |
-                       |           |
-                       -------------
-                       |           |
-                       |     4     |
-                       |           |
-                       |           |
-                       -------------
-                       |           |
-                       |     5     |
-                       |           |
-                       |           |
-                       -------------
+     *               <p>
+     *               <p>
+     *               ------------------------------------
+     *               |          |           |           |
+     *               |    1     |     2     |     3     |
+     *               |          |           |           |
+     *               |          |           |           |
+     *               ------------------------------------
+     *               |           |
+     *               |     0     |
+     *               |           |
+     *               |           |
+     *               -------------
+     *               |           |
+     *               |     4     |
+     *               |           |
+     *               |           |
+     *               -------------
+     *               |           |
+     *               |     5     |
+     *               |           |
+     *               |           |
+     *               -------------
      */
 
     public void printCube(Writer writer) throws IOException {
@@ -115,17 +116,12 @@ public class Cube {
     }
 
     void printCubeDebug(Writer writer) throws IOException {
-        getBlocks().forEach(b -> {
-            try {
-                writer.write(b.getId() + "->" + b.getAssignedBlock().toString() + "\n");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+        for (CubeBlock b : blocks) {
+            writer.write(b.getId() + "->" + b.getAssignedBlock().toString() + "\n");
+        }
         printCube(writer);
 
     }
-
 
 
 }

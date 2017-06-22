@@ -13,6 +13,7 @@ public class SeqUtilTest {
 
     @Test
     public void testCreateNextSequence() throws Exception {
+        new SeqUtil();
         Queue nextSequence = SeqUtil.createNextSequence("012345");
         assertThat(nextSequence.size(), equalTo(720));
     }

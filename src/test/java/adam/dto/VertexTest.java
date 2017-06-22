@@ -1,5 +1,6 @@
 package adam.dto;
 
+import adam.helpers.EqualsTestHelper;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.equalTo;
@@ -32,19 +33,17 @@ public class VertexTest {
         Point point = new PointXYZ(0, 0, 0);
         Vertex vertex = new Vertex(1, point);
         Vertex vertex2 = new Vertex(1, point);
-        assertThat(vertex.equals(vertex2), equalTo(true));
-        assertThat(vertex.equals(vertex), equalTo(true));
-        assertThat(vertex.equals(null), equalTo(false));
-        assertThat(vertex.equals("test"), equalTo(false));
+        Vertex vertex3 = new Vertex(2, point);
+        EqualsTestHelper.verifyEquals(vertex, vertex2, vertex3);
     }
 
     @Test
     public void getHashCode() {
         Point point = new PointXYZ(0, 0, 0);
         Vertex vertex = new Vertex(1, point, '0');
-        Vertex vertex2 = new Vertex(2, point, 'X');
-        assertThat(vertex.hashCode(), not(equalTo(vertex2.hashCode())));
-        assertThat(new Vertex(3,null).hashCode(), equalTo(2931));
+        Vertex vertex2 = new Vertex(1, point, '0');
+        Vertex vertex3 = new Vertex(2, point, 'X');
+        EqualsTestHelper.verifyHashCode(vertex, vertex2, vertex3);
     }
 
     @Test

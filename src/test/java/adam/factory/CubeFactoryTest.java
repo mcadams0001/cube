@@ -15,6 +15,7 @@ import static org.junit.Assert.assertThat;
 public class CubeFactoryTest {
     @Test
     public void createInstance() throws Exception {
+        new CubeFactory();
         Cube cube = CubeFactory.createInstance();
         assertThat(cube, notNullValue());
         List<CubeBlock> blocks = cube.getBlocks();

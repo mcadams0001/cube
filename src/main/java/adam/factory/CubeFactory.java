@@ -9,7 +9,7 @@ import java.util.Arrays;
  * Factory used for creating a new instance of a cube.
  */
 public class CubeFactory {
-    private CubeFactory() {
+    CubeFactory() {
         //Hide constructor
     }
     /**
