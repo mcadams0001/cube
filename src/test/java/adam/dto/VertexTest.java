@@ -31,10 +31,15 @@ public class VertexTest {
     @Test
     public void verifyBothVertexAreSame() {
         Point point = new PointXYZ(0, 0, 0);
+        Point point2 = new PointXYZ(1, 0, 0);
         Vertex vertex = new Vertex(1, point);
         Vertex vertex2 = new Vertex(1, point);
         Vertex vertex3 = new Vertex(2, point);
         EqualsTestHelper.verifyEquals(vertex, vertex2, vertex3);
+        assertThat(new Vertex(1, point, 'x'), not(equalTo(new Vertex(1, point, '0'))));
+        assertThat(new Vertex(1, point, 'x'), not(equalTo(new Vertex(1, point2, 'x'))));
+        assertThat(new Vertex(1, point, 'x'), not(equalTo(new Vertex(1, null, 'x'))));
+
     }
 
     @Test
@@ -44,6 +49,7 @@ public class VertexTest {
         Vertex vertex2 = new Vertex(1, point, '0');
         Vertex vertex3 = new Vertex(2, point, 'X');
         EqualsTestHelper.verifyHashCode(vertex, vertex2, vertex3);
+        EqualsTestHelper.verifyHashCode(vertex, vertex2, new Vertex(3,null));
     }
 
     @Test

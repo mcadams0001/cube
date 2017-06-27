@@ -10,6 +10,8 @@ public class PointXYZTest {
     @Test
     public void testVerifyEquals() {
         EqualsTestHelper.verifyEquals(new PointXYZ(1,1,1), new PointXYZ(1,1, 1), new PointXYZ(1,2,3));
+        EqualsTestHelper.verifyEquals(new PointXYZ(1,1,1), new PointXYZ(1,1, 1), new PointXYZ(1,1,3));
+        EqualsTestHelper.verifyEquals(new PointXYZ(1,1,1), new PointXYZ(1,1, 1), new PointXYZ(2,1,3));
     }
 
     @Test
