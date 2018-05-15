@@ -1,18 +1,17 @@
 package adam.enums;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class RotationEnumTest {
+class RotationEnumTest {
     @Test
-    public void shouldRotationEnum() throws Exception {
+    void shouldRotationEnum() {
         String[] shapes = RotationEnum.DEG_90.rotateShapes(new String[]{"11010", "00100", "01010", "01011"});
-        assertThat(shapes[0], equalTo("01011"));
-        assertThat(shapes[1], equalTo("11010"));
-        assertThat(shapes[2], equalTo("00100"));
-        assertThat(shapes[3], equalTo("01010"));
+        assertEquals("01011", shapes[0]);;
+        assertEquals("11010", shapes[1]);;
+        assertEquals("00100", shapes[2]);;
+        assertEquals("01010", shapes[3]);;
     }
 
 

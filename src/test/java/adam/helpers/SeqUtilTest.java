@@ -1,31 +1,31 @@
 package adam.helpers;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class SeqUtilTest {
+class SeqUtilTest {
 
     @Test
-    public void testCreateNextSequence() throws Exception {
+    void testCreateNextSequence() {
         new SeqUtil();
         Queue nextSequence = SeqUtil.createNextSequence("012345");
-        assertThat(nextSequence.size(), equalTo(720));
+        assertEquals(720, nextSequence.size());
+        ;
     }
 
     @Test
-    public void shouldRemoveAllRepresentationsForWhichResultWasFound() throws Exception {
+    void shouldRemoveAllRepresentationsForWhichResultWasFound() {
         String representation = "012345";
         Queue<String> set = new LinkedList<>();
         set.addAll(Arrays.asList("012345", "234501", "134250", "034521"));
         SeqUtil.removeSameRepresentations(set, representation);
-        assertThat(set, notNullValue());
-        assertThat(set, hasItems("234501"));
+        assertNotNull(set);
+        assertTrue(set.contains("234501"));
 
     }
 

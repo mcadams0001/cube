@@ -1,62 +1,61 @@
 package adam.dto;
 
 import adam.helpers.EqualsTestHelper;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.not;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-public class VertexTest {
+class VertexTest {
 
     @Test
-    public void createVertex() {
+    void createVertex() {
         Point point = new PointXYZ(0, 0, 0);
         Vertex vertex = new Vertex(1, point);
-        assertThat(vertex.getId(), equalTo(1));
-        assertThat(vertex.getPoint(), equalTo(point));
-        assertThat(vertex.getShape(), equalTo('0'));
+        assertEquals(1, vertex.getId());
+        assertEquals(point, vertex.getPoint());
+        assertEquals('0', vertex.getShape());
     }
 
     @Test
-    public void setVertexShape() {
+    void setVertexShape() {
         Point point = new PointXYZ(0, 0, 0);
         Vertex vertex = new Vertex(1, point);
         vertex.setShape('x');
-        assertThat(vertex.getShape(), equalTo('x'));
+        assertEquals('x', vertex.getShape());
         vertex.clear();
-        assertThat(vertex.getShape(), equalTo('0'));
+        assertEquals('0', vertex.getShape());
     }
 
     @Test
-    public void verifyBothVertexAreSame() {
+    void verifyBothVertexAreSame() {
         Point point = new PointXYZ(0, 0, 0);
         Point point2 = new PointXYZ(1, 0, 0);
         Vertex vertex = new Vertex(1, point);
         Vertex vertex2 = new Vertex(1, point);
         Vertex vertex3 = new Vertex(2, point);
         EqualsTestHelper.verifyEquals(vertex, vertex2, vertex3);
-        assertThat(new Vertex(1, point, 'x'), not(equalTo(new Vertex(1, point, '0'))));
-        assertThat(new Vertex(1, point, 'x'), not(equalTo(new Vertex(1, point2, 'x'))));
-        assertThat(new Vertex(1, point, 'x'), not(equalTo(new Vertex(1, null, 'x'))));
+        assertNotEquals(new Vertex(1, point, '0'), new Vertex(1, point, 'x'));
+        assertNotEquals(new Vertex(1, point2, 'x'), new Vertex(1, point, 'x'));
+        assertNotEquals(new Vertex(1, null, 'x'), new Vertex(1, point, 'x'));
 
     }
 
     @Test
-    public void getHashCode() {
+    void getHashCode() {
         Point point = new PointXYZ(0, 0, 0);
         Vertex vertex = new Vertex(1, point, '0');
         Vertex vertex2 = new Vertex(1, point, '0');
         Vertex vertex3 = new Vertex(2, point, 'X');
         EqualsTestHelper.verifyHashCode(vertex, vertex2, vertex3);
-        EqualsTestHelper.verifyHashCode(vertex, vertex2, new Vertex(3,null));
+        EqualsTestHelper.verifyHashCode(vertex, vertex2, new Vertex(3, null));
     }
 
     @Test
-    public void getToString() {
+    void getToString() {
         Point point = new PointXYZ(1, 0, 0);
         Vertex vertex = new Vertex(1, point, 'X');
-        assertThat(vertex.toString(), equalTo("[1,0,0]=X"));
+        assertEquals("[1,0,0]=X", vertex.toString());
     }
 
 

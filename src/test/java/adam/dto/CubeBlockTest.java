@@ -3,90 +3,90 @@ package adam.dto;
 import adam.enums.RotationEnum;
 import adam.factory.CubeFactory;
 import adam.fixture.BlockFixture;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.io.StringWriter;
 import java.util.List;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.junit.Assert.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class CubeBlockTest {
+class CubeBlockTest {
     @Test
-    public void shouldJoinBlockWithCube() throws Exception {
+    void shouldJoinBlockWithCube() {
         Cube cube = CubeFactory.createInstance();
         Block block = BlockFixture.getBlock5();
         CubeBlock cubeBlock = cube.getBlock(0);
         int resultPlace = cubeBlock.insertBlock(block);
-        assertThat(resultPlace, equalTo(11));
+        assertEquals(11, resultPlace);
         Block block2 = BlockFixture.getBlock2().rotated(RotationEnum.DEG_270);
         int secondOperation = cube.getBlock(4).insertBlock(block2);
-        assertThat(secondOperation, equalTo(8));
+        assertEquals(8, secondOperation);
         resultPlace = cubeBlock.insertBlock(block);
-        assertThat(resultPlace, equalTo(-1));
+        assertEquals(-1, resultPlace);
     }
 
     @Test
-    public void shouldReturnMirroredBlock() throws Exception {
+    void shouldReturnMirroredBlock() {
         //"11011", "11010", "01010", "00101"
         Block mirrored = BlockFixture.getBlock5().mirrored();
-        assertThat(mirrored.getEdge(0).getFullShape(), equalTo("11011"));
-        assertThat(mirrored.getEdge(1).getFullShape(), equalTo("10100"));
-        assertThat(mirrored.getEdge(2).getFullShape(), equalTo("01010"));
-        assertThat(mirrored.getEdge(3).getFullShape(), equalTo("01011"));
+        assertEquals("11011", mirrored.getEdge(0).getFullShape());
+        assertEquals("10100", mirrored.getEdge(1).getFullShape());
+        assertEquals("01010", mirrored.getEdge(2).getFullShape());
+        assertEquals("01011", mirrored.getEdge(3).getFullShape());
     }
 
     @Test
-    public void shouldReturnMirroredAndRotated() throws Exception {
+    void shouldReturnMirroredAndRotated() {
         Block block = BlockFixture.getBlock3().mirrored().rotated(RotationEnum.DEG_90);
-        assertThat(block.getEdge(0).getFullShape(), equalTo("00100"));
-        assertThat(block.getEdge(1).getFullShape(), equalTo("01011"));
-        assertThat(block.getEdge(2).getFullShape(), equalTo("11010"));
-        assertThat(block.getEdge(3).getFullShape(), equalTo("01010"));
+        assertEquals("00100", block.getEdge(0).getFullShape());
+        assertEquals("01011", block.getEdge(1).getFullShape());
+        assertEquals("11010", block.getEdge(2).getFullShape());
+        assertEquals("01010", block.getEdge(3).getFullShape());
 
     }
 
 
     @Test
-    public void shouldRotate() throws Exception {
+    void shouldRotate() {
         Block block4 = BlockFixture.getBlock3().rotated(RotationEnum.DEG_90);
-        assertThat(block4.getEdge(0).getFullShape(), equalTo("01011"));
-        assertThat(block4.getEdge(1).getFullShape(), equalTo("11010"));
-        assertThat(block4.getEdge(2).getFullShape(), equalTo("00100"));
-        assertThat(block4.getEdge(3).getFullShape(), equalTo("01010"));
+        assertEquals("01011", block4.getEdge(0).getFullShape());
+        assertEquals("11010", block4.getEdge(1).getFullShape());
+        assertEquals("00100", block4.getEdge(2).getFullShape());
+        assertEquals("01010", block4.getEdge(3).getFullShape());
 
         //"11010", "00100", "01010", "01011"
     }
 
     @Test
-    public void shouldRotateBy90Deg() throws Exception {
+    void shouldRotateBy90Deg() {
         Block block = BlockFixture.getBlock5().rotated(RotationEnum.DEG_90);
-        assertThat(block.getEdge(0).getFullShape(), equalTo("00101"));
-        assertThat(block.getEdge(1).getFullShape(), equalTo("11011"));
-        assertThat(block.getEdge(2).getFullShape(), equalTo("11010"));
-        assertThat(block.getEdge(3).getFullShape(), equalTo("01010"));
+        assertEquals("00101", block.getEdge(0).getFullShape());
+        assertEquals("11011", block.getEdge(1).getFullShape());
+        assertEquals("11010", block.getEdge(2).getFullShape());
+        assertEquals("01010", block.getEdge(3).getFullShape());
     }
 
     @Test
-    public void shouldRotateBy180Deg() throws Exception {
+    void shouldRotateBy180Deg() {
         Block block = BlockFixture.getBlock5().rotated(RotationEnum.DEG_180);
-        assertThat(block.getEdge(0).getFullShape(), equalTo("01010"));
-        assertThat(block.getEdge(1).getFullShape(), equalTo("00101"));
-        assertThat(block.getEdge(2).getFullShape(), equalTo("11011"));
-        assertThat(block.getEdge(3).getFullShape(), equalTo("11010"));
+        assertEquals("01010", block.getEdge(0).getFullShape());
+        assertEquals("00101", block.getEdge(1).getFullShape());
+        assertEquals("11011", block.getEdge(2).getFullShape());
+        assertEquals("11010", block.getEdge(3).getFullShape());
     }
 
     @Test
-    public void shouldRotateBy270Deg() throws Exception {
+    void shouldRotateBy270Deg() {
         Block block = BlockFixture.getBlock5().rotated(RotationEnum.DEG_270);
-        assertThat(block.getEdge(0).getFullShape(), equalTo("11010"));
-        assertThat(block.getEdge(1).getFullShape(), equalTo("01010"));
-        assertThat(block.getEdge(2).getFullShape(), equalTo("00101"));
-        assertThat(block.getEdge(3).getFullShape(), equalTo("11011"));
+        assertEquals("11010", block.getEdge(0).getFullShape());
+        assertEquals("01010", block.getEdge(1).getFullShape());
+        assertEquals("00101", block.getEdge(2).getFullShape());
+        assertEquals("11011", block.getEdge(3).getFullShape());
     }
 
     @Test
-    public void shouldPlaceCubes() throws Exception {
+    void shouldPlaceCubes() {
         Cube cube = CubeFactory.createInstance();
         CubeBlock block0 = cube.getBlock(0);
         CubeBlock block1 = cube.getBlock(1);
@@ -94,7 +94,7 @@ public class CubeBlockTest {
         CubeBlock block3 = cube.getBlock(3);
 
         int block0inserted = block0.insertBlock(BlockFixture.getBlock5());
-        assertThat("Failed to insert block 0", block0inserted, equalTo(11));
+        assertEquals(11, block0inserted, "Failed to insert block 0");
         assertShapeForEdge(block0.getEdges(), "11011", "11010", "01010", "00101");
         assertVertices(block0.getEdges(), '1', '1', '1', '0', '0', '0', '0', '1');
         assertShapeForEdge(block1.getEdges(), "01010", "00000", "00000", "00000");
@@ -104,7 +104,7 @@ public class CubeBlockTest {
 
 
         int block1inserted = block1.insertBlock(BlockFixture.getBlock1());
-        assertThat("Failed to insert block 1", block1inserted, equalTo(16));
+        assertEquals(16, block1inserted, "Failed to insert block 1");
         assertShapeForEdge(block0.getEdges(), "11011", "11011", "11111", "10101");
         assertVertices(block0.getEdges(), '1', '1', '1', '1', '1', '1', '1', '1');
         assertShapeForEdge(block1.getEdges(), "11111", "11011", "10101", "11011");
@@ -114,7 +114,7 @@ public class CubeBlockTest {
 
 
         int block2inserted = block2.insertBlock(BlockFixture.getBlock0());
-        assertThat("Failed to insert block 2", block2inserted, equalTo(14));
+        assertEquals(14, block2inserted, "Failed to insert block 2");
         assertShapeForEdge(block0.getEdges(), "11011", "11111", "11111", "10101");
         assertVertices(block0.getEdges(), '1', '1', '1', '1', '1', '1', '1', '1');
         assertShapeForEdge(block1.getEdges(), "11111", "11111", "10101", "11011");
@@ -125,7 +125,7 @@ public class CubeBlockTest {
 
         Block block3ToPlace = BlockFixture.getBlock3().mirrored().rotated(RotationEnum.DEG_90);
         int block3inserted = block3.insertBlock(block3ToPlace);
-        assertThat("Failed to insert block 3", block3inserted, equalTo(16));
+        assertEquals(16, block3inserted, "Failed to insert block 3");
         assertShapeForEdge(block0.getEdges(), "11111", "11111", "11111", "10101");
         assertVertices(block0.getEdges(), '1', '1', '1', '1', '1', '1', '1', '1');
         assertShapeForEdge(block1.getEdges(), "11111", "11111", "10101", "11011");
@@ -137,7 +137,7 @@ public class CubeBlockTest {
 
         CubeBlock block4 = cube.getBlock(4);
         int block4inserted = block4.insertBlock(BlockFixture.getBlock2().rotated(RotationEnum.DEG_270));
-        assertThat("Failed to insert block 4", block4inserted, equalTo(18));
+        assertEquals(18, block4inserted, "Failed to insert block 4");
         assertShapeForEdge(block0.getEdges(), "11111", "11111", "11111", "11111");
         assertVertices(block0.getEdges(), '1', '1', '1', '1', '1', '1', '1', '1');
         assertShapeForEdge(block1.getEdges(), "11111", "11111", "10101", "11111");
@@ -151,7 +151,7 @@ public class CubeBlockTest {
 
         CubeBlock block5 = cube.getBlock(5);
         int block5inserted = block5.insertBlock(BlockFixture.getBlock4().rotated(RotationEnum.DEG_180));
-        assertThat("Failed to insert block 5", block5inserted, equalTo(20));
+        assertEquals(20, block5inserted, "Failed to insert block 5");
         assertShapeForEdge(block0.getEdges(), "11111", "11111", "11111", "11111");
         assertVertices(block0.getEdges(), '1', '1', '1', '1', '1', '1', '1', '1');
         assertShapeForEdge(block1.getEdges(), "11111", "11111", "11111", "11111");
@@ -168,26 +168,26 @@ public class CubeBlockTest {
     }
 
     @Test
-    public void shouldIsSymmetric() throws Exception {
-        assertThat(BlockFixture.getBlock0().isSymmetric(), equalTo(true));
-        assertThat(BlockFixture.getBlock3().isSymmetric(), equalTo(false));
+    void shouldIsSymmetric() {
+        assertTrue(BlockFixture.getBlock0().isSymmetric());
+        assertFalse(BlockFixture.getBlock3().isSymmetric());
     }
 
     @Test
-    public void shouldCountDensityOfBlock() throws Exception {
-        assertThat(BlockFixture.getBlock0().density(), equalTo(4));
-        assertThat(BlockFixture.getBlock5().density(), equalTo(11));
+    void shouldCountDensityOfBlock() {
+        assertEquals(4, BlockFixture.getBlock0().density());
+        assertEquals(11, BlockFixture.getBlock5().density());
     }
 
     @Test
-    public void shouldIsOneAxisSymmetric() throws Exception {
-        assertThat(BlockFixture.getBlock0().isOneAxisSymmetric(), equalTo(true));
-        assertThat(BlockFixture.getBlock1().isOneAxisSymmetric(), equalTo(true));
-        assertThat(BlockFixture.getBlock2().isOneAxisSymmetric(), equalTo(false));
+    void shouldIsOneAxisSymmetric() {
+        assertTrue(BlockFixture.getBlock0().isOneAxisSymmetric());
+        assertTrue(BlockFixture.getBlock1().isOneAxisSymmetric());
+        assertFalse(BlockFixture.getBlock2().isOneAxisSymmetric());
     }
 
     @Test
-    public void shouldInsertBlock() throws Exception {
+    void shouldInsertBlock() throws IOException {
         /*
         0->Block3 DEG_0
         1->Block1 DEG_0
@@ -198,12 +198,12 @@ public class CubeBlockTest {
          */
 
         Cube cube = CubeFactory.createInstance();
-        assertThat(cube.getBlock(0).insertBlock(BlockFixture.getBlock3()), equalTo(9));
-        assertThat(cube.getBlock(1).insertBlock(BlockFixture.getBlock1()), equalTo(16));
-        assertThat(cube.getBlock(2).insertBlock(BlockFixture.getBlock2().rotated(RotationEnum.DEG_270)), equalTo(12));
-        assertThat(cube.getBlock(3).insertBlock(BlockFixture.getBlock5().mirrored().rotated(RotationEnum.DEG_270)), equalTo(16));
-        assertThat(cube.getBlock(4).insertBlock(BlockFixture.getBlock0()), equalTo(16));
-        assertThat(cube.getBlock(5).insertBlock(BlockFixture.getBlock4().mirrored().rotated(RotationEnum.DEG_180)), equalTo(20));
+        assertEquals(9, cube.getBlock(0).insertBlock(BlockFixture.getBlock3()));
+        assertEquals(16, cube.getBlock(1).insertBlock(BlockFixture.getBlock1()));
+        assertEquals(12, cube.getBlock(2).insertBlock(BlockFixture.getBlock2().rotated(RotationEnum.DEG_270)));
+        assertEquals(16, cube.getBlock(3).insertBlock(BlockFixture.getBlock5().mirrored().rotated(RotationEnum.DEG_270)));
+        assertEquals(16, cube.getBlock(4).insertBlock(BlockFixture.getBlock0()));
+        assertEquals(20, cube.getBlock(5).insertBlock(BlockFixture.getBlock4().mirrored().rotated(RotationEnum.DEG_180)));
 
         StringWriter writer = new StringWriter();
         cube.printCubeDebug(writer);
@@ -211,20 +211,19 @@ public class CubeBlockTest {
     }
 
 
-
     private void assertVertices(List<Edge> edges, char... shapes) {
         int index = 0;
         for (Edge edge : edges) {
-            assertThat("Invalid id in vertex 0 for: " + index, edge.getVertices().get(0).getShape(), equalTo(shapes[index]));
+            assertEquals(shapes[index], edge.getVertices().get(0).getShape(), "Invalid id in vertex 0 for: " + index);
             index++;
-            assertThat("Invalid id in vertex 1 for: " + index, edge.getVertices().get(1).getShape(), equalTo(shapes[index]));
+            assertEquals(shapes[index], edge.getVertices().get(1).getShape(), "Invalid id in vertex 1 for: " + index);
             index++;
         }
     }
 
     private void assertShapeForEdge(List<Edge> edges, String... shapes) {
         for (int i = 0; i < shapes.length; i++) {
-            assertThat("Invalid edge for id: " + i, edges.get(i).getFullShape(), equalTo(shapes[i]));
+            assertEquals(shapes[i], edges.get(i).getFullShape(), "Invalid edge for id: " + i);
         }
     }
 

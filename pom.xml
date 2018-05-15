@@ -10,7 +10,10 @@
 
 
     <properties>
-        <compiler.backend.version>1.8</compiler.backend.version>
+        <compiler.backend.version>10</compiler.backend.version>
+        <junit.version>1.2.0</junit.version>
+        <juppiter.version>5.2.0</juppiter.version>
+
         <sonar.host.url>https://sonarqube.com</sonar.host.url>
         <sonar.organization>mcadams0001-github</sonar.organization>
         <sonar.jacoco.reportPaths>${basedir}/target/jacoco.exec</sonar.jacoco.reportPaths>
@@ -25,7 +28,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.0.2</version>
+                <version>3.1.0</version>
                 <configuration>
                     <archive>
                         <index>true</index>
@@ -40,15 +43,22 @@
             </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.6.1</version>
+                <version>3.7.0</version>
                 <configuration>
                     <source>${compiler.backend.version}</source>
                     <target>${compiler.backend.version}</target>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.ow2.asm</groupId>
+                        <artifactId>asm</artifactId>
+                        <version>6.1.1</version>
+                    </dependency>
+                </dependencies>
             </plugin>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.20</version>
+                <version>2.21.0</version>
                 <executions>
                     <execution>
                         <id>default-test</id>
@@ -57,26 +67,34 @@
                             <goal>test</goal>
                         </goals>
                         <configuration>
-                            <argLine>${surefireArgLine}</argLine>
+                            <argLine>@{surefireArgLine}</argLine>
                         </configuration>
                     </execution>
                 </executions>
                 <configuration>
                     <excludes>
                         <exclude>**/*Tests.java</exclude>
+                        <exclude>**/*IntegrationTest.java</exclude>
                     </excludes>
                     <argLine>-Xms128m -Xmx256m</argLine>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.junit.platform</groupId>
+                        <artifactId>junit-platform-surefire-provider</artifactId>
+                        <version>${junit.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
+                <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
-                <version>3.3.0.603</version>
+                <version>3.4.0.905</version>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.7.9</version>
+                <version>0.8.1</version>
                 <configuration>
                     <excludes>
                         <exclude>**/fixture/**</exclude>
@@ -101,7 +119,6 @@
                             <goal>report</goal>
                         </goals>
                         <configuration>
-                            <skip>${skipTests}</skip>
                             <dataFile>${sonar.jacoco.reportPaths}</dataFile>
                         </configuration>
                     </execution>
@@ -111,20 +128,22 @@
     </build>
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${juppiter.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-junit</artifactId>
-            <version>2.0.0.0</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${juppiter.version}</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>2.7.22</version>
+            <version>2.18.3</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     <reporting>
@@ -132,7 +151,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.7.9</version>
+                <version>0.8.1</version>
                 <reportSets>
                     <reportSet>
                         <reports>

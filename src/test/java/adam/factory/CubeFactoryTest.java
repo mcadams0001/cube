@@ -3,32 +3,31 @@ package adam.factory;
 import adam.dto.Cube;
 import adam.dto.CubeBlock;
 import adam.dto.Edge;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.Assert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class CubeFactoryTest {
+class CubeFactoryTest {
     @Test
-    public void createInstance() throws Exception {
+    void createInstance() {
         new CubeFactory();
         Cube cube = CubeFactory.createInstance();
-        assertThat(cube, notNullValue());
+        assertNotNull(cube);
         List<CubeBlock> blocks = cube.getBlocks();
-        assertThat(blocks, notNullValue());
-        assertThat(blocks.size(), equalTo(6));
-        assertThat(blocks.stream().anyMatch(b -> b.getEdges().size() != 4), equalTo(false));
+        assertNotNull(blocks);
+        assertEquals(6, blocks.size());;
+        assertFalse(blocks.stream().anyMatch(b -> b.getEdges().size() != 4));;
         List<Edge> edges = blocks.stream().flatMap(b -> b.getEdges().stream()).collect(toList());
-        assertThat(edges.size(), equalTo(24));
+        assertEquals(24, edges.size());;
         edges.forEach(edge -> {
-            assertThat(edge.getVertices().size(), equalTo(2));
+            assertEquals(2, edge.getVertices().size());;
             edge.getVertices().forEach(vertex -> {
-                assertThat(vertex.getPoint(), notNullValue());
-                assertThat(vertex.getId(), notNullValue());
+                assertNotNull(vertex.getPoint());
             });
 
         });

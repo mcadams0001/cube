@@ -1,36 +1,36 @@
 package adam.dto;
 
 import adam.helpers.EqualsTestHelper;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class PointXYZTest {
+
+class PointXYZTest {
     @Test
-    public void testVerifyEquals() {
-        EqualsTestHelper.verifyEquals(new PointXYZ(1,1,1), new PointXYZ(1,1, 1), new PointXYZ(1,2,3));
-        EqualsTestHelper.verifyEquals(new PointXYZ(1,1,1), new PointXYZ(1,1, 1), new PointXYZ(1,1,3));
-        EqualsTestHelper.verifyEquals(new PointXYZ(1,1,1), new PointXYZ(1,1, 1), new PointXYZ(2,1,3));
+    void testVerifyEquals() {
+        EqualsTestHelper.verifyEquals(new PointXYZ(1, 1, 1), new PointXYZ(1, 1, 1), new PointXYZ(1, 2, 3));
+        EqualsTestHelper.verifyEquals(new PointXYZ(1, 1, 1), new PointXYZ(1, 1, 1), new PointXYZ(1, 1, 3));
+        EqualsTestHelper.verifyEquals(new PointXYZ(1, 1, 1), new PointXYZ(1, 1, 1), new PointXYZ(2, 1, 3));
     }
 
     @Test
-    public void testVerifyHashCode() {
-        EqualsTestHelper.verifyHashCode(new PointXYZ(1,1,1), new PointXYZ(1,1, 1), new PointXYZ(1,2,3));
+    void testVerifyHashCode() {
+        EqualsTestHelper.verifyHashCode(new PointXYZ(1, 1, 1), new PointXYZ(1, 1, 1), new PointXYZ(1, 2, 3));
     }
 
     @Test
-    public void shouldVerifyGetters() {
-        Point pointXY = new PointXYZ(1,2,3);
-        assertThat(pointXY.getX(), equalTo(1));
-        assertThat(pointXY.getY(), equalTo(2));
-        assertThat(pointXY.getZ(), equalTo(3));
+    void shouldVerifyGetters() {
+        Point pointXY = new PointXYZ(1, 2, 3);
+        assertEquals(1, pointXY.getX());
+        assertEquals(2, pointXY.getY());
+        assertEquals(3, pointXY.getZ());
     }
 
     @Test
-    public void shouldGetToString() {
-        Point pointXY = new PointXYZ(1,5,10);
-        assertThat(pointXY.toString(), equalTo("[1,5,10]"));
+    void shouldGetToString() {
+        Point pointXY = new PointXYZ(1, 5, 10);
+        assertEquals("[1,5,10]", pointXY.toString());
     }
 
 }

@@ -3,11 +3,9 @@ package adam.services;
 import adam.dto.Block;
 import adam.dto.Cube;
 import adam.exceptions.CubeCreationExceptions;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -17,15 +15,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
+import static org.mockito.MockitoAnnotations.initMocks;
 
-@RunWith(MockitoJUnitRunner.class)
-public class ExecutionServiceImplTest {
+class ExecutionServiceImplTest {
 
     private ExecutionServiceImpl service;
 
@@ -38,13 +35,14 @@ public class ExecutionServiceImplTest {
     @Mock
     private Cube mockCube;
 
-    @Before
-    public void setup() throws Exception {
+    @BeforeEach
+    void setup() throws Exception {
+        initMocks(this);
         service = new ExecutionServiceImpl(mockCubeService);
     }
 
     @Test
-    public void createCubesFile() throws Exception {
+    void createCubesFile() throws Exception {
         ExecutionServiceImpl spyService = spy(service);
         List<Block> blocks = new ArrayList<>();
         List<Cube> cubes = Arrays.asList(mockCube, mockCube, mockCube, mockCube);
@@ -55,26 +53,26 @@ public class ExecutionServiceImplTest {
         verify(mockFileWriter).flush();
     }
 
-    @Test(expected = CubeCreationExceptions.class)
-    public void testReturnWithoutWritingFileIfCubesAreEmpty() throws IOException, CubeCreationExceptions {
+    @Test
+    void testReturnWithoutWritingFileIfCubesAreEmpty() {
         List<Block> blocks = new ArrayList<>();
         List<Cube> cubes = new ArrayList<>();
         when(mockCubeService.createAllCubesFromBlocks(anyList())).thenReturn(cubes);
-        service.createCubesFile("fileName", blocks);
+        assertThrows(CubeCreationExceptions.class, () -> service.createCubesFile("fileName", blocks));
     }
 
     @Test
-    public void testShouldGet() throws IOException {
+    void testShouldGet() throws IOException {
         URL url = ExecutionServiceImpl.class.getResource(".");
         File targetFolder = new File(url.getFile());
-        assertThat(targetFolder, notNullValue());
+        assertNotNull(targetFolder);
         try (FileWriter fileWriter = service.getFileWriter(targetFolder.getAbsolutePath() + File.separator + "sampleFile.txt")) {
-            assertThat(fileWriter, notNullValue());
+            assertNotNull(fileWriter);
         }
     }
 
     @Test
-    public void testCaptureIOException() throws Exception {
+    void testCaptureIOException() throws Exception {
         Cube mockCube2 = mock(Cube.class);
         ExecutionServiceImpl spyService = spy(service);
         List<Block> blocks = new ArrayList<>();
@@ -82,12 +80,7 @@ public class ExecutionServiceImplTest {
         doReturn(mockFileWriter).when(spyService).getFileWriter(anyString());
         when(mockCubeService.createAllCubesFromBlocks(anyList())).thenReturn(cubes);
         doThrow(new IOException("test")).when(mockCube2).printCube(any());
-        try {
-            spyService.createCubesFile("fileName", blocks);
-            fail("Expected CubeCreationException");
-        } catch (CubeCreationExceptions ex) {
-            //Do nothing.
-        }
+        assertThrows(CubeCreationExceptions.class, () -> spyService.createCubesFile("fileName", blocks));
         verify(mockCube, times(2)).printCube(mockFileWriter);
         verify(mockFileWriter, never()).flush();
     }
