@@ -5,7 +5,9 @@ import adam.dto.Cube;
 import adam.exceptions.CubeCreationExceptions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -20,8 +22,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
-import static org.mockito.MockitoAnnotations.initMocks;
 
+@ExtendWith(MockitoExtension.class)
 class ExecutionServiceImplTest {
 
     private ExecutionServiceImpl service;
@@ -36,8 +38,7 @@ class ExecutionServiceImplTest {
     private Cube mockCube;
 
     @BeforeEach
-    void setup() throws Exception {
-        initMocks(this);
+    void setup() {
         service = new ExecutionServiceImpl(mockCubeService);
     }
 

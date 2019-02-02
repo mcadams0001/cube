@@ -21,8 +21,7 @@ class SeqUtilTest {
     @Test
     void shouldRemoveAllRepresentationsForWhichResultWasFound() {
         String representation = "012345";
-        Queue<String> set = new LinkedList<>();
-        set.addAll(Arrays.asList("012345", "234501", "134250", "034521"));
+        Queue<String> set = new LinkedList<>(Arrays.asList("012345", "234501", "134250", "034521"));
         SeqUtil.removeSameRepresentations(set, representation);
         assertNotNull(set);
         assertTrue(set.contains("234501"));
