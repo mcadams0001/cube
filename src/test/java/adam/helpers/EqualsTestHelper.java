@@ -8,7 +8,7 @@ public class EqualsTestHelper {
         assertEquals(obj1, obj2, "Two same object must be equal");
         assertNotEquals(obj1, obj3, "Two different objects cannot be equal");
         assertFalse(obj1.equals(null), "Object must not be equal to null");
-        assertFalse(obj1.equals(""), "Two different object types cannot be equal");
+        assertNotEquals("", obj1, "Two different object types cannot be equal");
     }
 
     public static <T> void verifyHashCode(T obj1, T obj2, T obj3) {

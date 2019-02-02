@@ -15,7 +15,6 @@ class SeqUtilTest {
         new SeqUtil();
         Queue nextSequence = SeqUtil.createNextSequence("012345");
         assertEquals(720, nextSequence.size());
-        ;
     }
 
     @Test

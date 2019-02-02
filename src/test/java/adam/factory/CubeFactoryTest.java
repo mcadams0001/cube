@@ -20,18 +20,13 @@ class CubeFactoryTest {
         assertNotNull(cube);
         List<CubeBlock> blocks = cube.getBlocks();
         assertNotNull(blocks);
-        assertEquals(6, blocks.size());;
-        assertFalse(blocks.stream().anyMatch(b -> b.getEdges().size() != 4));;
+        assertEquals(6, blocks.size());
+        assertFalse(blocks.stream().anyMatch(b -> b.getEdges().size() != 4));
         List<Edge> edges = blocks.stream().flatMap(b -> b.getEdges().stream()).collect(toList());
-        assertEquals(24, edges.size());;
+        assertEquals(24, edges.size());
         edges.forEach(edge -> {
-            assertEquals(2, edge.getVertices().size());;
-            edge.getVertices().forEach(vertex -> {
-                assertNotNull(vertex.getPoint());
-            });
-
+            assertEquals(2, edge.getVertices().size());
+            edge.getVertices().forEach(vertex -> assertNotNull(vertex.getPoint()));
         });
-
     }
-
 }
